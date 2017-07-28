@@ -1,15 +1,12 @@
 ---
 title: "Romania Education Institutions"
 author: "Sever Fundatureanu"
-date: "July 28, 2017"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## R Markdown
 
 ### July 28, 2017
 
