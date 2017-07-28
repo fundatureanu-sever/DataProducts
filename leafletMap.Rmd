@@ -29,7 +29,7 @@ unitNames <- schoolNames[, c("Cod.SIIIR", "Denumire")]
 mergedDF <- merge(geoMapping, unitNames)
 ```
 
-```{r cache=TRUE, echo=FALSE, warning=FALSE}
+```{r cache=TRUE, echo=FALSE, warning=FALSE, message=FALSE, cache.lazy=TRUE}
 library(leaflet)
 mergedDF$Denumire <- gsub("\xce", "A", mergedDF$Denumire)
 mergedDF$Denumire <- gsub("^", "", mergedDF$Denumire)
