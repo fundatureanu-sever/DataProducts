@@ -1,0 +1,39 @@
+---
+title: "Romania Education Institutions"
+author: "Sever Fundatureanu"
+date: "July 28, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+### July 28, 2017
+
+```{r cache=TRUE, echo=FALSE, warning=FALSE}
+Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jdk1.8.0_40")
+require(xlsx, warn.conflicts = FALSE)
+geoMapping <- read.xlsx("20170327-coordonategps-scoli.xlsx", sheetIndex=1)
+names(geoMapping) <- c("Cod.SIIIR", "lat", "lng")
+geoMapping$Cod.SIIIR <- as.character(geoMapping$Cod.SIIIR)
+geoMapping <- geoMapping[complete.cases(geoMapping), ]
+```
+
+```{r cache=TRUE, echo=FALSE, warning=FALSE}
+schoolNames <- read.csv("reteascolaraspecializari2016-2017.csv", header=TRUE, skipNul=TRUE, strip.white = TRUE, sep="\t", colClasses="character", allowEscapes = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+unitNames <- schoolNames[, c("Cod.SIIIR", "Denumire")]
+
+mergedDF <- merge(geoMapping, unitNames)
+```
+
+```{r cache=TRUE, echo=FALSE, warning=FALSE}
+library(leaflet)
+mergedDF$Denumire <- gsub("\xce", "A", mergedDF$Denumire)
+mergedDF$Denumire <- gsub("^", "", mergedDF$Denumire)
+mergedDF$Denumire <- gsub("\035", "", mergedDF$Denumire)
+mergedDF %>% leaflet() %>% addTiles() %>%
+    addMarkers(clusterOptions=markerClusterOptions(), popup=mergedDF$Denumire)
+```
