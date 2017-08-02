@@ -37,6 +37,6 @@ y <- list(
 plot_ly(y=forPlotly$TIP_PROPRIETATE, x=forPlotly$JUDET, z=forPlotly$VANZARI, 
         type="heatmap", colors="Spectral") %>% 
     layout(title="Distribution of Land Sales in Romania, March 2017",
-                 xaxis=x, yaxis=y,
+                 xaxis=x, yaxis=y, height=600, width=800,
                  margin=list(l=155, r=50, b=150, t=40, pad=4))
 ```
