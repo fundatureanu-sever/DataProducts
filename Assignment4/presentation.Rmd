@@ -1,0 +1,61 @@
+---
+title: "Predicting Temperature with Air Quality Dataset"
+author: "Sever Fundatureanu"
+date: "August 13, 2017"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+## Introduction
+
+- Application Goal: Allow the user to explore the relationship between Temperature and one of Ozone, Solar Radiation or Wind
+- Features
+    + Plot display of Temperature vs one of the 3 inputs mentioned above
+    + Prediction of Temperature for any value chosen by the user for the chosen input
+- Data: **airquality** dataset in R
+- App URL: [Predict Temperature using Air Quality Dataset](https://sever-dataproducts.shinyapps.io/Assignment4/)
+
+## Application Inputs
+
+- Radio-buttons with choice of one of Ozone, Solar Radiation, Wind
+- Slider for choosing the input value for prediction of temperature
+
+![](figures/input.png)
+
+## Application Output
+
+- Temperature value predicted using the linear model between Temperature and chosen input
+- Plot of temperature vs. chosen input (below snapshot uses Ozone as input)
+    + In blue we mark the linear model
+    + In red we mark the predicted point and coordinates based on the user's input value
+
+```{r fig.width=8, fig.height=6,echo=FALSE}
+library(png)
+library(grid)
+img <- readPNG("figures/Output.png")
+ grid.raster(img)
+```
+<!--![](figures/Output.png)-->
+
+## Implementation
+
+- Based on **Shiny**
+- The UI uses a *pageWithSidebar* layout
+- The server uses *reactive* functions to 
+    + recompute the linear model whenever the uses chooses a different input
+    + recompute the prediction of temperature whenever the user chooses a new value fom the slider
+    + update the slider range in the UI when the user chooses a new type of input
+- Implementation code can be found [here](https://github.com/fundatureanu-sever/DataProducts/tree/gh-pages/Assignment4)
+
+## Summary
+
+We used R's **airquality** dataset to build a **Shiny** app which allows the user to 
+
+- display the relationship between Temperature and one of Ozone, Solar Radiation or Wind
+- flexibly predict Temperature based on any input value
+
+
